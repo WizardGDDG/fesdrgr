@@ -1,0 +1,30 @@
+#include <iostream>
+#include <cmath>
+
+
+double f(double x) 
+{
+    return sin(x); 
+}
+
+
+double trapezoidal_rule(double a, double b, int n) 
+{
+    double h = (b - a) / n; 
+    double sum = f(a) + f(b); 
+    for (int i = 1; i < n; i++) 
+{
+        sum += 2 * f(a + i * h); 
+    }
+    return h * sum / 2;
+}
+
+int main() {
+    double a = 0; 
+    double b = M_PI; 
+    int n = 100; 
+    double integral = trapezoidal_rule(a, b, n);
+    std::cout << "Integral of sin(x) from " << a << " to " << b << " is approximately: " << integral << std::endl;
+
+    return 0;
+}
