@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+float determinant(float matrix[3][3]) {
+    return matrix[0][0] * (matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1]) -
+        matrix[0][1] * (matrix[1][0] * matrix[2][2] - matrix[1][2] * matrix[2][0]) +
+        matrix[0][2] * (matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0]);
+}
+
+void solveEquation(float A[3][3], float B[3]) {
+    float detA = determinant(A);
+
+    if (detA == 0) {
+        cout << "No unique solution exists." << endl;
+        return;
+    }
+
+    float X[3];
+    float tempA[3][3];
+
+    // Solve for X1
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            tempA[j][i] = B[j];
+            if (i > 0) {
+                tempA[j][i - 1] = A[j][i - 1];
+            }
+        }
+        X[i] = determinant(tempA) / detA;
+    }
+
+    cout << "The solutions are: ";
+    for (int i = 0; i < 3; i++) {
+        cout << "X" << i + 1 << " = " << X[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    float A[3][3] = {{2, 1, -1},
+                     {-3, -1, 2},
+                     {-2, 1, 2}};
+    float B[3] = {8, -11, -3};
+
+    solveEquation(A, B);
+
+    return 0;
+}
