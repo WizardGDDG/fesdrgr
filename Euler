@@ -1,0 +1,28 @@
+#include <iostream>
+
+double f(double x, double y) 
+{
+    return x + y; // Пример: y' = x + y
+}
+
+void euler(double x0, double y0, double h, double x_target) 
+{
+    while (x0 < x_target) 
+    {
+        y0 = y0 + h * f(x0, y0);
+        x0 += h;
+    }
+    std::cout << "y(" << x_target << ") = " << y0 << std::endl;
+}
+
+int main() 
+{
+    double x0 = 0.0; 
+    double y0 = 1.0; 
+    double h = 0.1; 
+    double x_target = 1.0; 
+
+    euler(x0, y0, h, x_target);
+
+    return 0;
+}
