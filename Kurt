@@ -1,0 +1,52 @@
+#include <iostream>
+#include <cmath>
+
+class KurtosisCalculator 
+{
+public:
+    double kurtosis(double data[], int size) 
+    {
+        double sum = 0;
+        double mean = 0;
+        double variance = 0;
+        double kurtosis = 0;
+
+        
+        for (int i = 0; i < size; i++) 
+        {
+            sum += data[i];
+        
+        }
+        mean = sum / size;
+
+        
+        for (int i = 0; i < size; i++) 
+        {
+            variance += pow(data[i] - mean, 2);
+        }
+        variance = variance / size;
+
+        
+        double sum4th = 0;
+        for (int i = 0; i < size; i++) 
+        {
+            sum4th += pow(data[i] - mean, 4);
+        }
+        kurtosis = sum4th / (size * pow(variance, 2));
+
+        return kurtosis;
+    }
+};
+
+int main() 
+{
+    double data[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int size = 10;
+
+    KurtosisCalculator calculator;
+    double result = calculator.kurtosis(data, size);
+
+    std::cout << "Kurtosis: " << result << std::endl;
+
+    return 0;
+}
